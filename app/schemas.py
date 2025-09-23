@@ -6,6 +6,9 @@ class ProductIn(BaseModel):
     description: Optional[str] = None
     price: float = Field(ge=0)
     stock: int = Field(ge=0)
+    color: Optional[str] = None
+    size: Optional[str] = None
+    product_type: Optional[str] = Field(None)
 
 class ProductOut(ProductIn):
     id: int

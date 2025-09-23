@@ -9,6 +9,9 @@ class Product(Base):
     description: Mapped[str | None] = mapped_column(Text, nullable=True)
     price: Mapped[float] = mapped_column(Numeric(10, 2))
     stock: Mapped[int] = mapped_column(Integer, default=0)
+    color: Mapped[str | None] = mapped_column(String(64), index=True, nullable=True)
+    size: Mapped[str | None]  = mapped_column(String(32), nullable=True)
+    product_type: Mapped[str | None] = mapped_column(String(64), index=True, nullable=True)
 
 class CartItem(Base):
     __tablename__ = "cart_items"
@@ -16,8 +19,7 @@ class CartItem(Base):
     session_id: Mapped[str] = mapped_column(String(64), index=True)  # simple session-based cart
     product_id: Mapped[int] = mapped_column(ForeignKey("products.id", ondelete="RESTRICT"))
     quantity: Mapped[int] = mapped_column(Integer, default=1)
-
-    product: Mapped["Product"] = relationship()
+    product: Mapped["Product"] = relationship(lazy="selectin")
 
 class Order(Base):
     __tablename__ = "orders"
