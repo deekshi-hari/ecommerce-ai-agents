@@ -26,6 +26,8 @@ class Order(Base):
     id: Mapped[int] = mapped_column(primary_key=True)
     session_id: Mapped[str] = mapped_column(String(64), index=True)
     total: Mapped[float] = mapped_column(Numeric(12, 2))
+    status: Mapped[str] = mapped_column(String(16), index=True, default="pending", nullable=False)
+    payment_token: Mapped[str | None] = mapped_column(String(64), unique=True, index=True, nullable=True)
 
 class OrderItem(Base):
     __tablename__ = "order_items"

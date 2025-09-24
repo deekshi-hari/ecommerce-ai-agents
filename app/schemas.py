@@ -33,3 +33,9 @@ class OrderOut(BaseModel):
     total: float
     class Config:
         from_attributes = True
+
+class CheckoutOut(BaseModel):
+    status: str
+    payment_link: Optional[str] = None
+    amount: Optional[float] = None
+    message: Optional[str] = None
